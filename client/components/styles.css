@@ -1,0 +1,63 @@
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-color);
+  background: var(--bg-color);
+  position: relative;
+}
+/*might not neeed main */
+.Main {
+  display: block;
+  margin: 0 auto;
+  margin-top: 5em;
+  max-width: 50em;
+  text-align: center;
+}
+.calendar {
+  display: block;
+  position: relative;
+  width: 20%;
+  background: var(--neutral-color);
+  border: 1px solid var(--border-color);
+}
+.calendar .header {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 90%;
+  padding: 1.5em 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.row-middle {
+  align-items: center;
+}
+.col {
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+}
+
+.col-start {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.col-center {
+  justify-content: center;
+  text-align: center;
+}
+.col-end {
+  justify-content: flex-end;
+  text-align: right;
+}

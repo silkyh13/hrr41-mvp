@@ -6,7 +6,7 @@ const db = require('../database/index.js');
 const port = 1028;
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../public'));
+app.use(express.static(__dirname + '/../dist'));
 
 
 app.listen(port, () => {
