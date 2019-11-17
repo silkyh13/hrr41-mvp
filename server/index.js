@@ -20,10 +20,22 @@ app.get('/api/schedule', (req, res) => {
 
 app.post('/api/schedule', (req, res) => {
   models.post(req.body.event_start, req.body.event_end, req.body.event_description, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    }
     res.send(results);
   });
 });
 
+app.delete('/api/schedule/:id', (req, res) => {
+  models.delete(req.params.id, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send(results);
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Review server listening on port ${port}, ${new Date()}`);

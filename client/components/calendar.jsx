@@ -1,7 +1,7 @@
 import React from "react";
 import { subMonths, addMonths, compareAsc, format } from 'date-fns'
-
 import styles from './styles.css';
+
 class Calendar extends React.Component {
   state = {
     currentMonth: new Date(),//Sat Nov 16 2019 21:03:38 GMT-0500
@@ -22,21 +22,22 @@ class Calendar extends React.Component {
   renderHeader() {
     const dateFormat = 'MMMM';
     return (
-      <div className="header row flex-middle">
 
-        <div className="col col-start">
+      <div className= {`${styles.header} ${styles.row} ${styles.rowMiddle}`} >
+
+        <div className={`${styles.col} ${styles.colStart}`}>
           <div className="icon" onClick={this.prevMonth}>
             go_left
           </div>
         </div>
 
-        <div className="col col-center">
+        <div className={`${styles.col} ${styles.colCenter}`}>
           <span>
             {format(this.state.currentMonth, dateFormat)}
           </span>
         </div>
 
-        <div className="col col-end" onClick={this.nextMonth}>
+        <div className={`${styles.col} ${styles.colEnd}`} onClick={this.nextMonth}>
           <div className="icon">
             go_right
           </div>
@@ -49,7 +50,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div className="calendar">
+      <div className={styles.calendar}>
         {this.renderHeader()}
 
       </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './styles.css';
 import axios from 'axios';
 import moment from 'moment';
+import ListEvents from './listEvents.jsx'
+import Modal from './modal.jsx'
 
 let convert = (date) => {
   let saveDate = date.slice(0, 10)
@@ -19,18 +21,23 @@ class Form extends React.Component {
       endDate: '',
       event: '',
       data:[],
-      clickedEvent: {}
+      clickedEvent: {},
+      show: false
     }
     this.handlestartDate = this.handlestartDate.bind(this);
     this.handleendDate = this.handleendDate.bind(this);
     this.handleEvent = this.handleEvent.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.onClick = this.onClick.bind(this);
+  }
+
+  toggleModal() {
+    this.setState((state) => ({ show: !state.show }));
   }
   onClick(event) {
     let element = event.target;
-
     let start = convert(element.getAttribute('start_date'));
     let end = convert(element.getAttribute('end_date'));
 
@@ -38,17 +45,20 @@ class Form extends React.Component {
       clickedEvent: {
         start: start,
         end: end,
-        event: element.getAttribute('event')
-      }
+        clickedE: element.getAttribute('event')
+      },
+      show: true
     })
-
   }
+
   handlestartDate(event) {
     this.setState({startDate: event.target.value});
   }
+
   handleendDate(event) {
     this.setState({endDate: event.target.value});
   }
+
   handleEvent(event) {
     this.setState({event: event.target.value});
   }
@@ -79,7 +89,7 @@ class Form extends React.Component {
 
     axios.get('/api/schedule')
     .then((results) => {
-      this.setState({data: results.data, currentDate: day}, () => console.log('your mom', this.state.currentDate) )
+      this.setState({data: results.data, currentDate: day})
     })
     .catch((error) => {
       console.log(error);
@@ -87,40 +97,34 @@ class Form extends React.Component {
   }
 
   render () {
-    let start_date = this.state.clickedEvent.start;
-    let end_date = this.state.clickedEvent.end;
-    let event = this.state.clickedEvent.event;
+    const {show, startDate, currentDate, endDate, event } = this.state;
+    const {start, end, clickedE} = this.state.clickedEvent;
+
     return (
       <div>
-        <div>
-          start:{start_date} end:{end_date} event:{event}
-        </div>
+        <Modal toggle={this.toggleModal} show={show} start={start} end={end} event={clickedE} />
 
         <form onSubmit={this.handleSubmit}>
-
           <label>
             Start:
-            <input type="datetime-local" value={this.state.startDate || this.state.currentDate} min={this.state.currentDate}  onChange={this.handlestartDate}></input>
+            <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate}></input>
           </label>
-
           <label>
             End:
-            <input type="datetime-local" value={this.state.endDate || this.state.currentDate} min={this.state.currentDate} onChange={this.handleendDate}></input>
+            <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate}></input>
           </label>
-
           <label>
             Event:
-            <input type="text" placeholder="event" value={this.state.event || ''} onChange={this.handleEvent}/>
+            <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent}/>
           </label>
           <input type="submit" value="Submit" />
-
         </form>
 
         <ol>
-          {this.state.data.map((event, index) => <li key= {index} onClick={this.onClick} start_date={event.event_start} end_date={event.event_end} event={event.event_description}>
-            {event.event_description}
-          </li>)}
+          {this.state.data.map((event, index) => <ListEvents key={index} onClick={this.onClick} event={event}
+          />)}
         </ol>
+
       </div>
     )
   }
