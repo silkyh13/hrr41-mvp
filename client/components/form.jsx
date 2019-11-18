@@ -63,7 +63,7 @@ class Form extends React.Component {
     if (defined) {
       this.setState((state) => ({ show: !state.show }));
     }
-
+    console.log(this.state.show, 'true or false?')
   }
   onClick = (event) => {
     let element = event.target;
@@ -98,9 +98,9 @@ class Form extends React.Component {
   handleDelete(id) {
     axios.delete('/api/schedule/' + id)
     .then(response => {
-      this.setState((state) => ({ show: !state.show }))
       console.log(response);
     });
+    this.toggleModal
     this.componentDidMount();
   }
 

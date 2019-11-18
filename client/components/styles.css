@@ -1,15 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.modalForm {
-  max-inline-size: min-content;
+.submit {
+
 }
 .list {
-  padding-left: 50px;
+  position: absolute;
+  padding-left: 70px;
   max-width: 600px;
 }
 .event {
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: inherit;
-  font-size: 20px;
+  font-size: 18px;
   color:#C74579;
   letter-spacing: 5px;
   /* animation: blur .75s ease-out infinite; */
@@ -60,19 +61,82 @@
   top: 10px;
   justify-content: center;
 }
+#update {
+  font-size: 14px;
+  position: absolute;
+  display: flex;
+  padding: 3px 10px;
+  top: -38px;
+  margin-left: 180px;
+  padding-right: 10px;
+  border-radius: 50px;
+  background-color: #00B1FF;
+  color: white;
+  border: 3px solid white;
+  transition: border 0.2s ease;
+}
+#trash {
+  font-size: 20px;
+  position: absolute;
+  display: flex;
+  padding: 3px 10px;
+  top: 110px;
+  margin-left: 270px;
+  padding-right: 10px;
+  border-radius: 50px;
+  background-color: #00B1FF;
+  color: white;
+  border: 3px solid white;
+  transition: border 0.2s ease;
+}
+#exit {
+  font-size: 20px;
+  position: absolute;
+  display: flex;
+  padding: 3px 10px;
+  margin-left: 325px;
+  border-radius: 50px;
+  top: 110px;
+  background-color: #00B1FF;
+  color: white;
+  border: 3px solid white;
+  transition: border 0.2s ease;
+}
+#trash:hover {
+  border: 5px solid #81D9FF;
+  cursor: pointer;
+}
+
+#exit:hover {
+  border: 5px solid #81D9FF;
+  cursor: pointer;
+}
+#update:hover {
+  border: 5px solid #81D9FF;
+  cursor: pointer;
+}
+
+
 .modalContent {
   font-family: "Comic Sans MS", cursive, sans-serif;
-  background-color: #fefefe;
+  background-color: #C74579;
   margin: 100px 500px;
   padding: 20px;
   border: 1px solid #888;
   width: 398px;
   overflow: hidden;
-  min-height: 250px;
-  max-height: 200px;
+  min-height: 290px;
+  max-height: 290px;
   max-width: 398px;
 }
-
+.modalForm {
+  position: absolute;
+  background-color: #ad5e7e;
+  display: grid;
+  height: 220px;
+  top: 30%;
+  width: 25.5%;
+}
 .eventRow {
   background:red;
   margin-bottom:10px;
