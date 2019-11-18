@@ -126,7 +126,12 @@ class Form extends React.Component {
   componentDidMount() {
     let moments  = moment().format()
     let day = moments.slice(0, 19);
-
+         // const compareDate = (a,b) => {
+      //   let a_s = new Date(a.event_start);
+      //   let b_s = new Date(b.event_end);
+      //   return a_s < b_s;
+      // }
+      //Array.sort(results.data, compareDate)
     axios.get('/api/schedule')
     .then((results) => {
       this.setState({data: results.data, currentDate: day})
