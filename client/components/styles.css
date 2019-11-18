@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.modalForm {
+  max-inline-size: min-content;
+}
 .list {
   padding-left: 50px;
   max-width: 600px;

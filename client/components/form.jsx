@@ -24,14 +24,31 @@ class Form extends React.Component {
       clickedEvent: {},
       show: false
     }
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
+  handleUpdate(id) {
+    let start = convert(this.state.startDate);
+    let end = convert(this.state.endDate);
+    axios.put('/api/schedule/' + id, {
+      event_start: start,
+      event_end: end
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  }
+
   handleDelete(id) {
 
-    axios.delete('/api/schedule' + id)
+    axios.delete('/api/schedule/' + id)
     .then(response => {
       console.log(response);
     })
@@ -65,10 +82,12 @@ class Form extends React.Component {
   }
 
   handlestartDate = (event) => {
+    console.log(event.target.value)
     this.setState({startDate: event.target.value});
   }
 
   handleendDate = (event) =>{
+    console.log(event.target.value)
     this.setState({endDate: event.target.value});
   }
 
@@ -123,7 +142,7 @@ class Form extends React.Component {
 
     return (
       <div>
-        <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE} deleteEvent={this.handleDelete}/>
+        <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
 
         <form onSubmit={this.handleSubmit}>
           <label>

@@ -37,6 +37,15 @@ app.delete('/api/schedule/:id', (req, res) => {
   });
 });
 
+app.put('/api/schedule/:id', (req, res) => {
+  models.put(req.body, req.params.id, (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.end(JSON.stringify(results));
+    }
+  });
+});
 app.listen(port, () => {
   console.log(`Review server listening on port ${port}, ${new Date()}`);
 });
