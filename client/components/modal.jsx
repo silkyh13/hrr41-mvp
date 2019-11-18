@@ -6,27 +6,29 @@ const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate
   <div className={show ? styles.modalShow : styles.modalNone} onClick={toggle}>
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
-
-        <div>
-        <i className="fa fa-times" id={styles.exit} aria-hidden="true" />
-          <i className="fa fa-trash" id={styles.trash} aria-hidden="true" onClick={() =>
-            {deleteEvent(id)}}></i>
+        <div className={styles.button}>
+          <div className={styles.trash}>
+            <i className="fa fa-trash" aria-hidden="true" onClick={() => {deleteEvent(id)}}></i>
+          </div>
+          <div className={styles.exit}>
+            <i className="fa fa-times" aria-hidden="true" id={id}/>
+          </div>
         </div>
 
         <form onSubmit={() =>{onSubmit(id)}} className={styles.modalForm}>
           <label>
-            event: {event}
+            Event: {event}
           </label>
           <label>
-            start: {start}
+            Start: {start}
             <input type="datetime-local" value={startDate || currentDate} min={currentDate} onChange={handlestartDate}></input>
           </label>
           <label>
-            end: {end}
+            End: {end}
             <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={handleendDate}></input>
           </label>
 
-          <input type="submit" value="UPDATE" id={styles.update}/>
+          <input type="submit" value="UPDATE" className={styles.update}/>
         </form>
 
       </div>
