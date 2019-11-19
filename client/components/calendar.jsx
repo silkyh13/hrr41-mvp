@@ -13,6 +13,7 @@ class Calendar extends React.Component {
   state = {
     currDay: moment(),
     today: moment(),
+    showMonth: false
   }
   weekdays = moment.weekdays();//["Sunday", "Monday"...]
   abbrevdays = moment.weekdaysShort(); //[Sun, Mon, Tue...]
@@ -46,10 +47,42 @@ class Calendar extends React.Component {
     let firstDay = moment(moment()).startOf('month').format('d');//5 for November 2019
     return firstDay;
   }
+  SelectList = (props) => {
+    let monthNames = props.data.map((data) => {
+      return (
+        <div key={data}>
+          <a>
+            {data}
+          </a>
+        </div>
+      )
+    });
+    return (
+      <div className="monthNames">
+        {monthNames}
+      </div>
+    )
+  }
 
+  onChangeMonth = (e, month) => {
+    this.setState({
+      showMonth: !this.state.showMonth
+    });
+  }
+  monthHeader = () => {
+    return (
+      <span className="label-month" onClick={(e) => {this.onChangeMonth(e, this.month())}}>
+
+          {this.month()}
+          {this.state.showMonth &&
+            <this.SelectList data={this.months} />
+          }
+      </span>
+  );
+  }
 
   render() {
-    console.log( moment(moment()).startOf('month').format('d'))
+    // console.log( moment(moment()).startOf('month').format('d'))
       let weekdays = this.abbrevdays.map((day) => {
           return (
               <td key={day} className="week-day">{day}</td>
@@ -79,12 +112,11 @@ class Calendar extends React.Component {
       let rows = [];
       let cells = [];
       displayDays.forEach((row, i) => {
-        console.log('row', row)
         if ((i % 7) !== 0) {
             cells.push(row);
         } else {
             let insertRow = cells.slice();
-            console.log('insertRow', insertRow)//[3, 4, 5, 6, 7, 8, 9]
+            // console.log('insertRow', insertRow)[3, 4, 5, 6, 7, 8, 9]
             rows.push(insertRow);
             cells = [];// clear the days saved
             cells.push(row);
@@ -107,7 +139,9 @@ class Calendar extends React.Component {
             <table className="calendar">
               <thead>
                 <tr className="calendar-header">
-
+                <td colSpan ="5">
+                  <this.monthHeader />
+                </td>
                 </tr>
               </thead>
 
