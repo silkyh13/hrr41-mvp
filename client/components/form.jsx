@@ -1,9 +1,16 @@
 import React from 'react';
-import styles from './styles.css';
 import axios from 'axios';
 import moment from 'moment';
 import ListEvents from './listEvents.jsx'
 import Modal from './modal.jsx'
+
+const styles = {
+  list: {
+    position: "absolute",
+    paddingLeft: "70px",
+    maxWidth: "600px",
+  }
+}
 
 let convert = (date) => {
   let saveDate = date.slice(0, 10)
@@ -160,7 +167,7 @@ class Form extends React.Component {
           <input type="submit" value="Submit" />
         </form>
 
-        <ol className={styles.list}>
+        <ol style={styles.list}>
           {this.state.data.map((event, index) => <ListEvents key={index} onClick={this.onClick} event={event}
           />)}
         </ol>

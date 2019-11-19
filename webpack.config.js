@@ -13,9 +13,9 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-        options: {
-          modules: true
-        },
+        // options: {
+        //   modules: true
+        // },
       }
     ]
   }
