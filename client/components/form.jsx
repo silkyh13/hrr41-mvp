@@ -154,10 +154,16 @@ class Form extends React.Component {
     "July", "August", "September", "October", "November", "December"];
 
     let groupKey = 0;
-    let groups = this.state.data.reduce(function (r, o) {
-        var m = monthNames[new Date(o.event_start).getMonth()] + " " + (Number(new Date(o.event_start).getYear()) + 1900);
-        (r[m])? r[m].data.push(o) : r[m] = {group: String(groupKey++), data: [o]};
-        return r;
+    let groups = this.state.data.reduce(function (output, curr) {
+      //.getYear() = 2019 => 119
+        var m = monthNames[new Date(curr.event_start).getUTCMonth()] + " " + (Number(new Date(curr.event_start).getYear()) + 1900);
+        ( output[m]
+          ?
+          output[m].data.push(curr)
+          :
+          output[m] = {group: String(groupKey++), data: [curr]}
+        );
+        return output;
     }, {});
     console.log(groups)
     return (
