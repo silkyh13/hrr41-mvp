@@ -27,20 +27,6 @@ const styles = {
     top: "30%",
     width: "25.5%",
   },
-  trash: {
-    fontSize: "20px",
-    position: "absolute",
-    display: "flex",
-    padding: "3px 10px",
-    top: "110px",
-    marginLeft: "270px",
-    paddingRight: "10px",
-    borderRadius: "50px",
-    backgroundColor: "white",
-    color: "black",
-    border: "3px solid black",
-    transition: "border 0.2s ease",
-  },
   modalNone: {
     display: "none",
   },
@@ -55,46 +41,19 @@ const styles = {
     backgroundColor: "rgb(0,0,0)",
     backgroundColor: "rgba(0,0,0,0.4)",
     zIndex: "9999",
-  },
-  update: {
-      fontSize: "14px",
-      position: "absolute",
-      display: "flex",
-      padding: "3px 10px",
-      top: "-38px",
-      marginLeft: "180px",
-      paddingRight: "10px",
-      borderRadius: "50px",
-      backgroundColor: "white",
-      color: "black",
-      border: "3px solid black",
-      transition: "border 0.2s ease",
-  },
-  exit: {
-    fontSize: "20px",
-    position: "absolute",
-    display: "flex",
-    padding:" 3px 10px",
-    marginLeft:" 325px",
-    borderRadius:" 50px",
-    top: "110px",
-    backgroundColor: "white",
-    color: "black",
-    border: "3px solid black",
-    transition: "border 0.2s ease",
   }
 }
 //cannot combine css of modalShow and modalContainer because it grey box doesnt cover the whole screen
 const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate, currentDate, endDate, deleteEvent, toggle, id, show, start, end, event}) => (
   <div style={show ? styles.modalShow : styles.modalNone}
-  className={show? "modalShow" : "modalNone"} onClick={toggle}>
+  className={show ? "modalShow" : "modalNone"} onClick={toggle}>
     <div style={styles.modalContainer}>
       <div style={styles.modalContent}>
         <div>
-          <div style={styles.trash}>
+          <div style={styles.trash} className="trash">
             <i className="fa fa-trash" aria-hidden="true" onClick={() => {deleteEvent(id)}}></i>
           </div>
-          <div style={styles.exit}>
+          <div style={styles.exit} className="exit">
             <i className="fa fa-times" aria-hidden="true" id={id}/>
           </div>
         </div>
@@ -112,7 +71,7 @@ const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate
             <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={handleendDate}></input>
           </label>
 
-          <input type="submit" value="UPDATE" style={styles.update}/>
+          <input type="image" src="http://localhost:1028/images/V.png"  style={styles.update} className="update"/>
         </form>
 
       </div>

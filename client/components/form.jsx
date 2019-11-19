@@ -155,17 +155,14 @@ class Form extends React.Component {
 
     let groupKey = 0;
     let groups = this.state.data.reduce(function (output, curr) {
-      //.getYear() = 2019 => 119
-        var m = monthNames[new Date(curr.event_start).getUTCMonth()] + " " + (Number(new Date(curr.event_start).getYear()) + 1900);
-        ( output[m]
-          ?
-          output[m].data.push(curr)
-          :
-          output[m] = {group: String(groupKey++), data: [curr]}
-        );
-        return output;
+    var monthYear = monthNames[new Date(curr.event_start).getUTCMonth()] + " " + ((new Date(curr.event_start).getYear()) + 1900); //April 2020
+
+      (output[monthYear] ? output[monthYear].data.push(curr)
+      : output[monthYear] = {group: String(groupKey++), data: [curr]}
+      );
+      return output;
     }, {});
-    console.log(groups)
+
     return (
       <div>
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
@@ -186,26 +183,24 @@ class Form extends React.Component {
           <input type="submit" value="Submit" />
         </form>
 
-        {
-          Object.keys(groups).map( (month, index) => {
+        {Object.keys(groups).map( (month, index) => {
             return (
-            <div>
-            <h1>{month}</h1>
-            <ol style={styles.list}>
-            {
-              groups[month].data.map((event, index) => {
-                  // console.log(event)
-                  return (
-                    <ListEvents
-                    key={index}
-                    onClick={this.onClick}
-                    event={event}
-                  />
-                  );
-                })
-            }
-            </ol>
-            </div>);
+              <div key={index}>
+                <h1>{month}</h1>
+                <ol style={styles.list}>
+                  {groups[month].data.map((event, index) => {
+                      // console.log(event)
+                      return (
+                        <ListEvents
+                        key={index}
+                        onClick={this.onClick}
+                        event={event}
+                        />
+                      );
+                    })
+                  }
+                </ol>
+              </div>);
           })
         }
 
