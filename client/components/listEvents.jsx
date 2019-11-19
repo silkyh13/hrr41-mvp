@@ -5,7 +5,7 @@ const styles = {
     fontFamily: "Comic Sans MS",
     textAlign: "inherit",
     fontSize: "18px",
-    color: "#C74579",
+    color: "black",
     letterSpacing: "5px",
   }
 }

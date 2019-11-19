@@ -7,8 +7,25 @@ import Modal from './modal.jsx'
 const styles = {
   list: {
     // position: "absolute",
-    paddingLeft: "70px",
+    paddingLeft: "90px",
     maxWidth: "600px",
+    fontWeight: "bolder"
+  },
+  h1: {
+    fontFamily: "Comic Sans MS",
+    color: "black",
+    paddingLeft: "30px"
+  },
+  event: {
+    overflow: "scroll",
+    height: "150px",
+    borderStyle: "groove",
+    borderColor: "#ad5e7e",
+    width: "50%",
+    marginLeft: "4%",
+    backgroundColor: "white",
+    opacity: "0.55",
+    borderRadius: "25px"
   }
 }
 
@@ -185,8 +202,8 @@ class Form extends React.Component {
 
         {Object.keys(groups).map( (month, index) => {
             return (
-              <div key={index}>
-                <h1>{month}</h1>
+              <div key={index} style={styles.event}>
+                <h1 style={styles.h1}>{month}</h1>
                 <ol style={styles.list}>
                   {groups[month].data.map((event, index) => {
                       // console.log(event)
