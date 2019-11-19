@@ -136,7 +136,11 @@ class Form extends React.Component {
 
     axios.get('/api/schedule')
     .then((results) => {
-      this.setState({data: results.data, currentDate: day})
+      const compareDate = function (a,b) {
+        return (new Date(a.event_start)) - (new Date(b.event_start));
+      }
+      const sorted = results.data.sort(compareDate);
+      this.setState({data: sorted, currentDate: day})
     })
     .catch((error) => {
       console.log(error);
@@ -146,7 +150,6 @@ class Form extends React.Component {
   render () {
     const {show, startDate, currentDate, endDate, event } = this.state;
     const {start, end, clickedE, id} = this.state.clickedEvent;
-
     return (
       <div>
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>

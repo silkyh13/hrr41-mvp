@@ -27,7 +27,6 @@ const styles = {
     top: "30%",
     width: "25.5%",
   },
-  button : {},
   trash: {
     fontSize: "20px",
     position: "absolute",
@@ -91,7 +90,7 @@ const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate
   className={show? "modalShow" : "modalNone"} onClick={toggle}>
     <div style={styles.modalContainer}>
       <div style={styles.modalContent}>
-        <div style={styles.button}>
+        <div>
           <div style={styles.trash}>
             <i className="fa fa-trash" aria-hidden="true" onClick={() => {deleteEvent(id)}}></i>
           </div>
