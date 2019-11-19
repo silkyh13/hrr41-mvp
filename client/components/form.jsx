@@ -6,7 +6,7 @@ import Modal from './modal.jsx'
 
 const styles = {
   list: {
-    position: "absolute",
+    // position: "absolute",
     paddingLeft: "70px",
     maxWidth: "600px",
   }
@@ -150,6 +150,16 @@ class Form extends React.Component {
   render () {
     const {show, startDate, currentDate, endDate, event } = this.state;
     const {start, end, clickedE, id} = this.state.clickedEvent;
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+
+    let groupKey = 0;
+    let groups = this.state.data.reduce(function (r, o) {
+        var m = monthNames[new Date(o.event_start).getMonth()] + " " + (Number(new Date(o.event_start).getYear()) + 1900);
+        (r[m])? r[m].data.push(o) : r[m] = {group: String(groupKey++), data: [o]};
+        return r;
+    }, {});
+    console.log(groups)
     return (
       <div>
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
@@ -170,10 +180,28 @@ class Form extends React.Component {
           <input type="submit" value="Submit" />
         </form>
 
-        <ol style={styles.list}>
-          {this.state.data.map((event, index) => <ListEvents key={index} onClick={this.onClick} event={event}
-          />)}
-        </ol>
+        {
+          Object.keys(groups).map( (month, index) => {
+            return (
+            <div>
+            <h1>{month}</h1>
+            <ol style={styles.list}>
+            {
+              groups[month].data.map((event, index) => {
+                  // console.log(event)
+                  return (
+                    <ListEvents
+                    key={index}
+                    onClick={this.onClick}
+                    event={event}
+                  />
+                  );
+                })
+            }
+            </ol>
+            </div>);
+          })
+        }
 
       </div>
     )

@@ -10,11 +10,15 @@ const styles = {
   }
 }
 
-const ListEvents = ({event, onClick}) => (
-  <li style={styles.event} onClick={onClick} id={event.id} start_date={event.event_start} end_date={event.event_end} event={event.event_description}>
-  {event.event_description}
-  </li>
-);
+const ListEvents = ({event, onClick}) => {
+  console.log(event)
+  return (
+    <li style={styles.event} onClick={onClick} id={event.id} start_date={event.event_start} end_date={event.event_end} event={event.event_description}>
+      {/* { monthNames[(new Date(event.event_start)).getMonth()]} */}
+    {event.event_description}
+    </li>
+  )
+}
 
 
 export default ListEvents;
