@@ -22,17 +22,24 @@ const styles = {
     borderStyle: "groove",
     borderColor: "#ad5e7e",
     width: "55%",
-    marginLeft: "10%",
+    marginLeft: "30%",
     backgroundColor: "white",
     opacity: "0.55",
     borderRadius: "25px",
     marginTop: "30px"
   },
+  label : {
+    fontSize: "x-large",
+  },
+  labelEnd: {
+    fontSize: "x-large",
+    paddingLeft: "22px"
+  },
   inputForm: {
     fontFamily: "Comic Sans MS",
     display: "flex",
     flexFlow: "column",
-    margin: "50px 0px 0px 50px",
+    margin: "30px 0px 0px 100px"
   },
   inputLabel : {
     border: "0",
@@ -40,7 +47,7 @@ const styles = {
     boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
     borderRadius: "10px",
     margin: "0px 10px 0px 10px",
-    width: "260px"
+    width: "370px"
   },
   inputEvent : {
     border: "0",
@@ -78,7 +85,9 @@ class Form extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  handleUpdate(id) {
+  handleUpdate(e, id) {
+    e.preventDefault();
+
     let start = convert(this.state.startDate);
     let end = convert(this.state.endDate);
     axios.put('/api/schedule/' + id, {
@@ -86,12 +95,12 @@ class Form extends React.Component {
       event_end: end
     })
     .then((response) => {
+      this.setState((state) => ({ show: !state.show }))
       console.log(response);
     })
     .catch((error) => {
       console.error(error);
     });
-
   }
 
   handleDelete(id) {
@@ -209,24 +218,6 @@ class Form extends React.Component {
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
 
         <div className="inputFormContainer">
-          <form onSubmit={this.handleSubmit} style={styles.inputForm}>
-            <label>
-              Start:
-              <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate} style={styles.inputLabel}></input>
-            </label>
-            <label>
-              End:
-              <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate} style={styles.inputLabel}></input>
-            </label>
-            <label>
-              Event:
-              <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} style={styles.inputEvent}/>
-            </label>
-            <input className="submit"type="submit" value="Submit" />
-          </form>
-
-
-
           {Object.keys(groups).map( (month, index) => {
             let currentMonth = this.props.month;
             let currentYear = this.props.year;
@@ -252,6 +243,28 @@ class Form extends React.Component {
 
             })
           }
+          <form onSubmit={this.handleSubmit} style={styles.inputForm}>
+            <label style={styles.label}>
+              Start:
+              <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate} style={styles.inputLabel}></input>
+            </label>
+            <label style={styles.labelEnd}>
+              End:
+              <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate} style={styles.inputLabel}></input>
+            </label>
+            <label style={styles.label}>
+              Event:
+              <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} style={styles.inputLabel}/>
+            </label>
+            <label>
+             <input className="submit" type="submit" value="Submit" />
+            </label>
+
+          </form>
+
+
+
+
         </div>
 
 

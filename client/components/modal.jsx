@@ -59,7 +59,7 @@ const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate
           </div>
         </div>
 
-        <form onSubmit={() =>{onSubmit(id)}} style={styles.modalForm}>
+        <form onSubmit={(e) =>{onSubmit(e, id)}} style={styles.modalForm}>
           <label>
             Event: {event}
           </label>
