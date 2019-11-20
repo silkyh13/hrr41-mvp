@@ -18,14 +18,15 @@ const styles = {
   },
   event: {
     overflow: "scroll",
-    height: "150px",
+    height: "800px",
     borderStyle: "groove",
     borderColor: "#ad5e7e",
-    width: "50%",
-    marginLeft: "4%",
+    width: "55%",
+    marginLeft: "32%",
     backgroundColor: "white",
     opacity: "0.55",
-    borderRadius: "25px"
+    borderRadius: "25px",
+    marginTop: "30px"
   }
 }
 
@@ -201,23 +202,28 @@ class Form extends React.Component {
         </form>
 
         {Object.keys(groups).map( (month, index) => {
-            return (
-              <div key={index} style={styles.event}>
-                <h1 style={styles.h1}>{month}</h1>
-                <ol style={styles.list}>
-                  {groups[month].data.map((event, index) => {
-                      // console.log(event)
-                      return (
-                        <ListEvents
-                        key={index}
-                        onClick={this.onClick}
-                        event={event}
-                        />
-                      );
-                    })
-                  }
-                </ol>
-              </div>);
+          let currentMonth = this.props.month;
+          let currentYear = this.props.year;
+          let yearAndMonth = currentMonth + ' ' + currentYear;
+            if (month === yearAndMonth) {
+              return (
+                <div key={index} style={styles.event}>
+                  <h1 style={styles.h1}>{month}</h1>
+                  <ol style={styles.list}>
+                    {groups[month].data.map((event, index) => {
+                        return (
+                          <ListEvents
+                          key={index}
+                          onClick={this.onClick}
+                          event={event}
+                          />
+                        );
+                      })
+                    }
+                  </ol>
+                </div>);
+            }
+
           })
         }
 

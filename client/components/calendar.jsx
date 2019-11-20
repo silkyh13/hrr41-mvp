@@ -4,54 +4,112 @@ import moment from "moment";
 
 
 class Calendar extends React.Component {
-
   constructor(props) {
     super(props);
     this.width = props.width || "350px";//default is 350
   }
-
   state = {
-    currDay: moment(),
     today: moment(),
-    showMonth: false
+    showMonth: false,
+    showYear: false,
+    savedYear: moment().format("YYYY"),
+    savedMonth: moment().format("MMMM")
   }
+  componentDidMount = () => {
+
+    this.props.yearMonth(this.state.savedYear, this.state.savedMonth);
+  }
+
   weekdays = moment.weekdays();//["Sunday", "Monday"...]
   abbrevdays = moment.weekdaysShort(); //[Sun, Mon, Tue...]
   months = moment.months();//["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
+/* ____________________________________________________*/
   //retrieve current year
   year = () => {
-    return this.state.currDay.format("Y");//2019
+    let year = this.state.today.format("Y");//2019
+    return year;
   }
+  yearHeader = () => {
+    return (
+      this.state.showyearHeader ?
+      <input
+          defaultValue = {this.year()}
+          className="editor-year"
+          type="number"
+          placeholder="year"/>
+      :
+      <span className="label-year">
+          {this.year()}
+      </span>
+    )
+  }
+
+/* ____________________________________________________*/
   //retrieve current month
   month = () => {
-    return this.state.currDay.format("MMMM");//"November"
+    let month = this.state.today.format("MMMM");//"November"
+    return month;
   }
   //retrieve total days in current month
   daysInMonth = () => {
-    return this.state.currDay.daysInMonth();
+    return this.state.today.daysInMonth();
   }
   //current date in number
   currentDate = () => {
-    return this.state.currDay.get("date");
+    return this.state.today.get("date");
   }
   //current date in string
   currentDay = () => {
-    return this.state.currDay.format("D");// "19"
+    return this.state.today.format("D");// "19"
   }
   //position of first day in month [0,1,2,3,4,5,6]
   //first example, if 1 is on friday, return 5
-
   firstDayOfMonth = () => {
-
-    let firstDay = moment(moment()).startOf('month').format('d');//5 for November 2019
+    let firstDay = moment(this.state.today).startOf('month').format('d');//5 for November 2019
     return firstDay;
+  }
+  setMonth = (month) => {
+    let monthNo = this.months.indexOf(month);
+    let today = Object.assign({}, this.state.today);
+    today = moment(today).set("month", monthNo);
+    this.setState({
+        today: today
+    });
+}
+// savedYear: this.state.today.format("Y")
+nextMonth = () => {
+  let today = Object.assign({}, this.state.today);
+  today = moment(today).add(1, "month");
+  // console.log(this.state.today.format("MMMM"), 'today')
+  this.setState({
+      today: today,
+      savedMonth: this.state.today.add(1, "month").format("MMMM"),
+      savedYear: this.state.today.format("YYYY")
+  }, () => this.props.yearMonth(this.state.savedYear, this.state.savedMonth));
+
+}
+
+prevMonth = () => {
+  let today = Object.assign({}, this.state.today);
+  today = moment(today).subtract(1, "month");
+  this.setState({
+      today: today,
+      savedMonth: this.state.today.subtract(1, "month").format("MMMM"),
+      savedYear: this.state.today.format("YYYY")
+  }, () => this.props.yearMonth(this.state.savedYear, this.state.savedMonth));
+
+}
+
+  //when I click on a month, it should change the data for that month
+  onSelectChange = (e, data) => {
+    this.setMonth(data);
+    this.props.onChangeMonth && this.props.onChangeMonth();
   }
   SelectList = (props) => {
     let monthNames = props.data.map((data) => {
       return (
         <div key={data}>
-          <a>
+          <a href="#month" onClick={(e) => {this.onSelectChange(e, data)}}>
             {data}
           </a>
         </div>
@@ -63,7 +121,7 @@ class Calendar extends React.Component {
       </div>
     )
   }
-
+  //drop down for months
   onChangeMonth = (e, month) => {
     this.setState({
       showMonth: !this.state.showMonth
@@ -71,18 +129,18 @@ class Calendar extends React.Component {
   }
   monthHeader = () => {
     return (
-      <span className="label-month" onClick={(e) => {this.onChangeMonth(e, this.month())}}>
-
-          {this.month()}
-          {this.state.showMonth &&
-            <this.SelectList data={this.months} />
-          }
-      </span>
+      <span className="label-month"
+      onClick={(e)=> {this.onChangeMonth(e, this.month())}}>
+      {this.month()}
+      {this.state.showMonth &&
+      <this.SelectList data={this.months} />
+      }
+  </span>
   );
   }
-
   render() {
-    // console.log( moment(moment()).startOf('month').format('d'))
+    console.log(this.state.showMonth)
+    // console.log(this.month(), this.year())
       let weekdays = this.abbrevdays.map((day) => {
           return (
               <td key={day} className="week-day">{day}</td>
@@ -96,10 +154,8 @@ class Calendar extends React.Component {
           {""}
         </td>);
       }
-
       let daysInMonth = [];
       for (let d = 1; d <= this.daysInMonth(); d++) {
-
         let eachDay = (d == this.currentDay() ? "current-day": "day");
         daysInMonth.push(
             <td key={d} className={eachDay} >
@@ -107,7 +163,6 @@ class Calendar extends React.Component {
             </td>
         );
       }
-
       var displayDays = [...blanks, ...daysInMonth];
       let rows = [];
       let cells = [];
@@ -126,7 +181,6 @@ class Calendar extends React.Component {
             rows.push(insertRow);
         }
       });
-
       let eachDay = rows.map((d, i) => {
         return (
             <tr key={i*10}>
@@ -137,13 +191,25 @@ class Calendar extends React.Component {
       return (
           <div className="calendar-container">
             <table className="calendar">
+
               <thead>
                 <tr className="calendar-header">
                 <td colSpan ="5">
                   <this.monthHeader />
+                  {" "}
+                  <this.yearHeader />
+                </td>
+                <td colSpan="2" className="nav-month">
+                    <i className="prev fa fa-fw fa-chevron-left"
+                        onClick={(e)=> {this.prevMonth()}}>
+                    </i>
+                    <i className="prev fa fa-fw fa-chevron-right"
+                        onClick={(e)=> {this.nextMonth()}}>
+                    </i>
                 </td>
                 </tr>
               </thead>
+
 
               <tbody>
                 <tr>
@@ -151,12 +217,11 @@ class Calendar extends React.Component {
                 </tr>
                   {eachDay}
               </tbody>
+
+
             </table>
-
           </div>
-
       );
   }
 }
-
 export default Calendar;
