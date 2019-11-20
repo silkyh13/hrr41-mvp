@@ -8,7 +8,7 @@ const styles = {
   list: {
     // position: "absolute",
     paddingLeft: "90px",
-    maxWidth: "600px",
+    // maxWidth: "600px",
     fontWeight: "bolder"
   },
   h1: {
@@ -18,18 +18,41 @@ const styles = {
   },
   event: {
     overflow: "scroll",
-    height: "800px",
+    height: "600px",
     borderStyle: "groove",
     borderColor: "#ad5e7e",
     width: "55%",
-    marginLeft: "32%",
+    marginLeft: "10%",
     backgroundColor: "white",
     opacity: "0.55",
     borderRadius: "25px",
     marginTop: "30px"
+  },
+  inputForm: {
+    fontFamily: "Comic Sans MS",
+    display: "flex",
+    flexFlow: "column",
+    margin: "50px 0px 0px 50px",
+  },
+  inputLabel : {
+    border: "0",
+    backgroundColor: "antiquewhite",
+    boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
+    borderRadius: "10px",
+    margin: "0px 10px 0px 10px",
+    width: "260px"
+  },
+  inputEvent : {
+    border: "0",
+    backgroundColor: "antiquewhite",
+    boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
+    borderRadius: "10px",
+    width: "250px",
+    height: "100px",
+    padding: "5px 0 74px 0",
+    margin: "12px"
   }
 }
-
 let convert = (date) => {
   let saveDate = date.slice(0, 10)
   let saveTime = ' ' + date.slice(11, 19);
@@ -182,50 +205,56 @@ class Form extends React.Component {
     }, {});
 
     return (
-      <div>
+      <div className="form">
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
 
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Start:
-            <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate}></input>
-          </label>
-          <label>
-            End:
-            <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate}></input>
-          </label>
-          <label>
-            Event:
-            <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div className="inputFormContainer">
+          <form onSubmit={this.handleSubmit} style={styles.inputForm}>
+            <label>
+              Start:
+              <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate} style={styles.inputLabel}></input>
+            </label>
+            <label>
+              End:
+              <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate} style={styles.inputLabel}></input>
+            </label>
+            <label>
+              Event:
+              <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} style={styles.inputEvent}/>
+            </label>
+            <input className="submit"type="submit" value="Submit" />
+          </form>
 
-        {Object.keys(groups).map( (month, index) => {
-          let currentMonth = this.props.month;
-          let currentYear = this.props.year;
-          let yearAndMonth = currentMonth + ' ' + currentYear;
-            if (month === yearAndMonth) {
-              return (
-                <div key={index} style={styles.event}>
-                  <h1 style={styles.h1}>{month}</h1>
-                  <ol style={styles.list}>
-                    {groups[month].data.map((event, index) => {
-                        return (
-                          <ListEvents
-                          key={index}
-                          onClick={this.onClick}
-                          event={event}
-                          />
-                        );
-                      })
-                    }
-                  </ol>
-                </div>);
-            }
 
-          })
-        }
+
+          {Object.keys(groups).map( (month, index) => {
+            let currentMonth = this.props.month;
+            let currentYear = this.props.year;
+            let yearAndMonth = currentMonth + ' ' + currentYear;
+              if (month === yearAndMonth) {
+                return (
+                  <div key={index} style={styles.event}>
+                    <h1 style={styles.h1}>{month}</h1>
+                    <ol style={styles.list}>
+                      {groups[month].data.map((event, index) => {
+                          return (
+                            <ListEvents
+                            key={index}
+                            onClick={this.onClick}
+                            event={event}
+                            />
+                          );
+                        })
+                      }
+                    </ol>
+                  </div>);
+              }
+
+            })
+          }
+        </div>
+
+
 
       </div>
     )

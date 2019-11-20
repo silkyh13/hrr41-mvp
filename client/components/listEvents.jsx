@@ -4,7 +4,7 @@ const styles = {
   event: {
     fontFamily: "Comic Sans MS",
     textAlign: "inherit",
-    fontSize: "18px",
+    fontSize: "22px",
     color: "black",
     letterSpacing: "5px",
   }

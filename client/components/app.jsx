@@ -22,6 +22,7 @@ class App extends React.Component {
         </div>
         <div>
         <Calendar yearMonth={this.yearMonth}/>
+
         </div>
 
       </div>
