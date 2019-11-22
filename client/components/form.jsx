@@ -82,7 +82,6 @@ class Form extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   handleUpdate(e, id) {
@@ -97,6 +96,7 @@ class Form extends React.Component {
     .then((response) => {
       this.setState((state) => ({ show: !state.show }))
       console.log(response);
+      this.componentDidMount();
     })
     .catch((error) => {
       console.error(error);
@@ -112,7 +112,7 @@ class Form extends React.Component {
     .catch((error) => {
       console.log(error);
     });
-    this.componentDidMount();
+
   }
 
   toggleModal = (event) => {
@@ -158,7 +158,6 @@ class Form extends React.Component {
       this.setState((state) => ({ show: !state.show }))
       console.log(response);
     });
-    this.componentDidMount();
   }
 
   handleSubmit(event) {
@@ -177,10 +176,11 @@ class Form extends React.Component {
     .catch((error) => {
       console.log(error);
     })
-    this.componentDidMount();
+
   }
 
   componentDidMount() {
+
     let moments  = moment().format()
     let day = moments.slice(0, 19);
 
@@ -190,7 +190,7 @@ class Form extends React.Component {
         return (new Date(a.event_start)) - (new Date(b.event_start));
       }
       const sorted = results.data.sort(compareDate);
-      this.setState({data: sorted, currentDate: day})
+      this.setState({data: sorted, currentDate: day}, () => {console.log('sdsds')})
     })
     .catch((error) => {
       console.log(error);
@@ -218,16 +218,17 @@ class Form extends React.Component {
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
 
         <div className="inputFormContainer">
-          {Object.keys(groups).map( (month, index) => {
+          {Object.keys(groups).map( (header, index) => {
             let currentMonth = this.props.month;
             let currentYear = this.props.year;
             let yearAndMonth = currentMonth + ' ' + currentYear;
-              if (month === yearAndMonth) {
+            // NOV 2019  === NOV 2019
+              if (header === yearAndMonth) {
                 return (
                   <div key={index} style={styles.event}>
-                    <h1 style={styles.h1}>{month}</h1>
+                    <h1 style={styles.h1}>{header}</h1>
                     <ol style={styles.list}>
-                      {groups[month].data.map((event, index) => {
+                      {groups[header].data.map((event, index) => {
                           return (
                             <ListEvents
                             key={index}
@@ -257,7 +258,7 @@ class Form extends React.Component {
               <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} style={styles.inputLabel}/>
             </label>
             <label>
-             <input className="submit" type="submit" value="Submit" />
+            <input className="submit" type="submit" value="Submit" />
             </label>
 
           </form>
