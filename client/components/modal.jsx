@@ -4,7 +4,7 @@ const styles = {
   modalContainer: {
     display: "block",
     position: "absolute",
-    top: "10px",
+    top: "10%",
     justifyContent: "center",
   },
   modalContent: {

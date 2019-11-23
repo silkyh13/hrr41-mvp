@@ -6,7 +6,7 @@ import moment from "moment";
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.width = props.width || "350px";//default is 350
+    this.width = props.width || "30%";//default is 350
   }
   state = {
     today: moment(),

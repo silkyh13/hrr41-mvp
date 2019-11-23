@@ -89,9 +89,16 @@ class Form extends React.Component {
 
     let start = convert(this.state.startDate);
     let end = convert(this.state.endDate);
+    let current = convert(this.state.currentDate)
+    let defined = (date) => {
+      if (date.length > 18) {
+        return date
+      }
+      return current
+    }
     axios.put('/api/schedule/' + id, {
-      event_start: start,
-      event_end: end
+      event_start: defined(start),
+      event_end: defined(end)
     })
     .then((response) => {
       this.setState((state) => ({ show: !state.show }))
@@ -190,7 +197,7 @@ class Form extends React.Component {
         return (new Date(a.event_start)) - (new Date(b.event_start));
       }
       const sorted = results.data.sort(compareDate);
-      this.setState({data: sorted, currentDate: day}, () => {console.log('sdsds')})
+      this.setState({data: sorted, currentDate: day})
     })
     .catch((error) => {
       console.log(error);
