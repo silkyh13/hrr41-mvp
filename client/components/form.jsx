@@ -113,13 +113,17 @@ class Form extends React.Component {
   handleDelete(id) {
 
     axios.delete('/api/schedule/' + id)
-    .then(response => {
+    .then((response) => {
+      this.setState((state) => ({ show: !state.show }))
       console.log(response);
+      this.componentDidMount();
     })
     .catch((error) => {
       console.log(error);
-    });
-
+    })
+    // .finally(() => {
+    //   this.componentDidMount();
+    // });
   }
 
   toggleModal = (event) => {
@@ -159,14 +163,6 @@ class Form extends React.Component {
     this.setState({event: event.target.value});
   }
 
-  handleDelete(id) {
-    axios.delete('/api/schedule/' + id)
-    .then(response => {
-      this.setState((state) => ({ show: !state.show }))
-      console.log(response);
-    });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     let start = convert(this.state.startDate);
@@ -197,7 +193,7 @@ class Form extends React.Component {
         return (new Date(a.event_start)) - (new Date(b.event_start));
       }
       const sorted = results.data.sort(compareDate);
-      this.setState({data: sorted, currentDate: day})
+      this.setState({data: sorted, currentDate: day}, () => {console.log('made it here')})
     })
     .catch((error) => {
       console.log(error);

@@ -1,6 +1,6 @@
 import React from "react";
-import Form from "./Form.jsx";
-import Calendar from "./Calendar.jsx"
+import Form from "./form.jsx";
+import Calendar from "./calendar.jsx"
 class App extends React.Component {
   constructor(props) {
     super(props);

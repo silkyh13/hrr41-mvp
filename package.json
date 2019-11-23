@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
-    "build": "webpack --mode production",
+    "build": "webpack --watch --mode development",
     "seed": "nodemon server/seed/index.js"
   },
   "repository": {
