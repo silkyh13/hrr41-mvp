@@ -139,7 +139,7 @@ prevMonth = () => {
   );
   }
   render() {
-    console.log(this.state.showMonth)
+    // console.log(this.state.showMonth)
     // console.log(this.month(), this.year())
       let weekdays = this.abbrevdays.map((day) => {
           return (
