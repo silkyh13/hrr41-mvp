@@ -220,6 +220,8 @@ prevMonth = () => {
 
 
             </table>
+            <hr/>
+
           </div>
       );
   }

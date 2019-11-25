@@ -4,13 +4,6 @@ import moment from 'moment';
 import ListEvents from './listEvents.jsx'
 import Modal from './modal.jsx'
 
-let convert = (date) => {
-  let saveDate = date.slice(0, 10)
-  let saveTime = ' ' + date.slice(11, 19);
-  let converted = saveDate + saveTime;
-  return converted;
-}
-
 class List extends React.Component {
   constructor(props) {
     super(props)
@@ -28,10 +21,10 @@ class List extends React.Component {
   handleUpdate(e, id) {
     e.preventDefault();
 
-    let start = convert(this.state.startDate);
-    let end = convert(this.state.endDate);
-    let current = convert(this.props.currentDate)
-    console.log(start, end, current)
+    let start = this.props.convert(this.state.startDate);
+    let end = this.props.convert(this.state.endDate);
+    let current = this.props.convert(this.props.currentDate)
+
     let defined = (date) => {
       if (date.length > 18) {
         return date
@@ -75,9 +68,8 @@ class List extends React.Component {
   //for modal
   onClick = (event) => {
     let element = event.target;
-    let start = convert(element.getAttribute('start_date'));
-    let end = convert(element.getAttribute('end_date'));
-
+    let start = this.props.convert(element.getAttribute('start_date'));
+    let end = this.props.convert(element.getAttribute('end_date'));
     this.setState({
       clickedEvent: {
         start: start,
@@ -89,19 +81,16 @@ class List extends React.Component {
     })
   }
   handlestartDate = (event) => {
-    console.log(event.target.value)
     this.setState({startDate: event.target.value});
   }
 
   handleendDate = (event) =>{
-    console.log(event.target.value)
     this.setState({endDate: event.target.value});
   }
 
   handleEvent = (event) => {
     this.setState({event: event.target.value});
   }
-
 
   render () {
     const {show, startDate, endDate, event } = this.state;
@@ -120,36 +109,36 @@ class List extends React.Component {
     }, {});
 
     return (
-      <div className="form">
+      <div className="list">
         <Modal toggle={this.toggleModal} show={show} id={id} start={start} end={end} event={clickedE}  deleteEvent={this.handleDelete} startDate={startDate} currentDate={this.props.currentDate} endDate={endDate} onSubmit={this.handleUpdate} handlestartDate={this.handlestartDate} handleendDate={this.handleendDate} handleEvent={this.handleEvent}/>
 
-        <div className="inputFormContainer">
-          {Object.keys(groups).map( (header, index) => {
-            let currentMonth = this.props.month;
-            let currentYear = this.props.year;
-            let yearAndMonth = currentMonth + ' ' + currentYear;
-            // NOV 2019  === NOV 2019
-              if (header === yearAndMonth) {
-                return (
-                  <div className="event" key={index} >
-                    <h1>{header}</h1>
-                    <ol  className="list">
-                      {groups[header].data.map((event, index) => {
-                          return (
-                            <ListEvents
-                            key={index}
-                            onClick={this.onClick}
-                            event={event}
-                            />
-                          );
-                        })
-                      }
-                    </ol>
-                  </div>);
-              }
-            })
-          }
-        </div>
+
+        {Object.keys(groups).map( (header, index) => {
+          let currentMonth = this.props.month;
+          let currentYear = this.props.year;
+          let yearAndMonth = currentMonth + ' ' + currentYear;
+          // NOV 2019  === NOV 2019
+            if (header === yearAndMonth) {
+              return (
+                <div className="event" key={index} >
+                  <h1>{header}</h1>
+                  <ol  className="list">
+                    {groups[header].data.map((event, index) => {
+                        return (
+                          <ListEvents
+                          key={index}
+                          onClick={this.onClick}
+                          event={event}
+                          />
+                        );
+                      })
+                    }
+                  </ol>
+                </div>);
+            }
+          })
+        }
+
       </div>
     )
   }

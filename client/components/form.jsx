@@ -2,12 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-let convert = (date) => {
-  let saveDate = date.slice(0, 10)
-  let saveTime = ' ' + date.slice(11, 19);
-  let converted = saveDate + saveTime;
-  return converted;
-}
 class Form extends React.Component {
 
   constructor(props) {
@@ -22,9 +16,12 @@ class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let start = convert(this.state.startDate);
-    let end = convert(this.state.endDate);
-    let current = convert(this.props.currentDate)
+    let convertDate = (date) => {
+      return this.props.convert(date)
+    }
+    let start = convertDate(this.state.startDate);
+    let end = convertDate(this.state.endDate);
+    let current = convertDate(this.props.currentDate)
     let defined = (date) => {
       if (date.length > 18) {
         return date
@@ -47,12 +44,12 @@ class Form extends React.Component {
 
 
   handlestartDate = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     this.setState({startDate: event.target.value});
   }
 
   handleendDate = (event) =>{
-    console.log(event.target.value)
+    // console.log(event.target.value)
     this.setState({endDate: event.target.value});
   }
 

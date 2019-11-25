@@ -20,11 +20,16 @@ class App extends React.Component {
       year, month
     })
   }
-  componentDidMount() {
+  convert = (date) => {
+    let saveDate = date.slice(0, 10)
+    let saveTime = ' ' + date.slice(11, 19);
+    let converted = saveDate + saveTime;
+    return converted;
+  }
 
+  componentDidMount() {
     let moments  = moment().format()
     let day = moments.slice(0, 19);
-
     axios.get('/api/schedule')
     .then((results) => {
       const compareDate = function (a,b) {
@@ -40,16 +45,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <div >
-        <div>
-        <List componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} year={this.state.year} month={this.state.month}/>
+      <div className="main">
+        <div className="left">
+
+            <Calendar yearMonth={this.yearMonth}/>
+
+            <Form componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} convert={this.convert}/>
+
+
         </div>
 
-        <div>
-        <Calendar yearMonth={this.yearMonth}/>
+        <div className="right">
+          <List componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} year={this.state.year} month={this.state.month}
+          convert={this.convert}/>
         </div>
 
-        <Form componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate}/>
       </div>
     );
   }

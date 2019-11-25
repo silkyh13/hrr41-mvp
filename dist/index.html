@@ -8,22 +8,60 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
   h1 {
-    font-family: Indie Flower;
-    color: black;
-    padding-left: 30px;
+    font-family: "Indie Flower", cursive, sans-serif;
+    color:  #ad5e7e;
+    padding-left: 10%;
+    font-size: 300%;
+    font-weight: bold;
   }
+  .main {
+    display: flex;
+    flex-direction: row;
+  }
+  .left {
+    display: flex;
+    flex-flow: column;
+    margin-top: 5%;
+    justify-content: space-between;
+    max-width: 550px;
+    margin-right: 5%;
+  }
+
+      /* calendar */
+  .calendar-container {
+    font-family: "Indie Flower", cursive, sans-serif;
+    font-weight: bold;
+    font-size: 225%;
+    display: grid;
+    padding-right: 10px;
+    text-align: center;
+    height: 400px;
+    width: 500px;
+    background-color: white;
+    border-color: #ad5e7e;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+  }
+
+  .calendar-container:hover{
+    background-color: white;
+    color:#ad5e7e;
+  }
+  .calendar-header {
+    font-size: 140%;
+  }
+  hr {
+    width: 100%;
+    border-top: 1px solid #ad5e7e;
+  }
+
   .labelEnd {
     font-size: x-large;
     padding-left: 22px;
   }
   .label {
     font-size: x-large;
-  }
-  .inputForm {
-    font-family: Indie Flower;
-    display: flex;
-    flex-flow: column;
-    margin: 30px 0px 0px 100px;
   }
   .inputLabel {
     border: 0;
@@ -43,27 +81,28 @@
     padding: 5px 0 74px 0;
     margin: 12px;
   }
+
+/* RIGHT list.jsx */
+  .right {
+    margin-top: 5%;
+  }
   .event {
     overflow: scroll;
     height: 600px;
-    border-style: groove;
-    border-color: #ad5e7e;
-    margin-left: 30%;
     background-color: white;
     opacity: 0.55;
-    border-radius: 25px;
-    margin-top: 30px;
-
+    width: 120%;
+    padding-left: 5%;
   }
-    .list {
-    padding-left: 90px;
+  .list {
     font-weight: bolder;
+    font-size: 100%;
   }
   .individualEvent{
-    font-family: Indie Flower;
+    font-family: "Indie Flower", cursive, sans-serif;
     text-align: inherit;
-    font-size: 22px;
-    color: black;
+    font-size: 200%;
+    color: #ad5e7e;
     letter-spacing: 5px;
   }
     .modalShow {
@@ -138,54 +177,16 @@
       transition: border 0.2s ease;
       margin-bottom: 27px;
     }
-    body {
+    /* body {
       background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.billboard.com%2Ffiles%2Fmedia%2F04-BTS-2017-cr-_Big-Hit-Entertainment-billboard-1548.jpg&f=1&nofb=1);
       background-repeat: repeat-y;
-      background-position: center top;
+      background-position: right;
       background-attachment: fixed;
-  }
-    /* calendar */
-    .calendar-container {
-    font-family: "Indie Flower", cursive, sans-serif;
-    position: fixed;
-    display: grid;
-    padding-right: 10px;
-    border-radius: 25px;
-    text-align: center;
-    /*width: 20%;*/
-    height: 200px;
-    width: 300px;
-    left: 8%;
-    top: 10%;
-    background-color: white;
-    opacity: 0.55;
-    border-style: groove;
-    border-color: #ad5e7e;
-    cursor: pointer;
-    transition: 800ms ease all;
-    outline: none;
-    }
-
-    .calendar-container:hover{
-      background-color: white;
-      color:#ad5e7e;
-    }
-
-    .inputFormContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .container {
-      display: inline-block;
-      margin-left: 10%;
-    }
-
+  } */
 
   </style>
 </head>
-<body style="background-color:black;">
+<body style="background-color:white;">
   <div class="container">
     <div id="calendar"></div>
     <div class="container"><script src="main.js"></script></div>
