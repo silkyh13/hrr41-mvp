@@ -5,60 +5,61 @@ import ListEvents from './listEvents.jsx'
 import Modal from './modal.jsx'
 
 const styles = {
-  list: {
-    // position: "absolute",
-    paddingLeft: "90px",
-    // maxWidth: "600px",
-    fontWeight: "bolder"
-  },
-  h1: {
-    fontFamily: "Comic Sans MS",
-    color: "black",
-    paddingLeft: "30px"
-  },
-  event: {
-    overflow: "scroll",
-    height: "600px",
-    borderStyle: "groove",
-    borderColor: "#ad5e7e",
-    width: "55%",
-    marginLeft: "30%",
-    backgroundColor: "white",
-    opacity: "0.55",
-    borderRadius: "25px",
-    marginTop: "30px"
-  },
-  label : {
-    fontSize: "x-large",
-  },
-  labelEnd: {
-    fontSize: "x-large",
-    paddingLeft: "22px"
-  },
-  inputForm: {
-    fontFamily: "Comic Sans MS",
-    display: "flex",
-    flexFlow: "column",
-    margin: "30px 0px 0px 100px"
-  },
-  inputLabel : {
-    border: "0",
-    backgroundColor: "antiquewhite",
-    boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
-    borderRadius: "10px",
-    margin: "0px 10px 0px 10px",
-    width: "370px"
-  },
-  inputEvent : {
-    border: "0",
-    backgroundColor: "antiquewhite",
-    boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
-    borderRadius: "10px",
-    width: "250px",
-    height: "100px",
-    padding: "5px 0 74px 0",
-    margin: "12px"
-  }
+  // list: {
+  //   // position: "absolute",
+  //   paddingLeft: "90px",
+  //   // maxWidth: "600px",
+  //   fontWeight: "bolder"
+  // },
+  // h1: {
+  //   fontFamily: "Indie Flower",
+  //   color: "black",
+  //   paddingLeft: "30px"
+  // },
+  // event: {
+  //   overflow: "scroll",
+  //   height: "600px",
+  //   borderStyle: "groove",
+  //   borderColor: "#ad5e7e",
+  //   /*width: "55%",*/
+  //   marginLeft: "30%",
+  //   backgroundColor: "white",
+  //   opacity: "0.55",
+  //   borderRadius: "25px",
+  //   marginTop: "30px"
+  // },
+  // label : {
+  //   fontSize: "x-large",
+  // },
+  // labelEnd: {
+  //   fontSize: "x-large",
+  //   paddingLeft: "22px"
+  // },
+  // inputForm: {
+  //   fontFamily: "Indie Flower",
+  //   display: "flex",
+  //   flexFlow: "column",
+  //   margin: "30px 0px 0px 100px"
+  // },
+  // inputLabel : {
+  //   border: "0",
+  //   backgroundColor: "antiquewhite",
+  //   boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
+  //   borderRadius: "10px",
+  //   margin: "0px 10px 0px 10px",
+  //   width: "370px"
+  // },
+  // inputEvent : {
+  //   border: "0",
+  //   backgroundColor: "antiquewhite",
+  //   boxShadow: "0 -2px 10px rgba(0, 0, 0, 1)",
+  //   borderRadius: "10px",
+  //   width: "250px",
+  //   height: "100px",
+  //   padding: "5px 0 74px 0",
+  //   margin: "12px"
+  // }
+
 }
 let convert = (date) => {
   let saveDate = date.slice(0, 10)
@@ -228,9 +229,9 @@ class Form extends React.Component {
             // NOV 2019  === NOV 2019
               if (header === yearAndMonth) {
                 return (
-                  <div key={index} style={styles.event}>
-                    <h1 style={styles.h1}>{header}</h1>
-                    <ol style={styles.list}>
+                  <div className="event" key={index} >
+                    <h1>{header}</h1>
+                    <ol  className="list">
                       {groups[header].data.map((event, index) => {
                           return (
                             <ListEvents
@@ -247,18 +248,18 @@ class Form extends React.Component {
 
             })
           }
-          <form onSubmit={this.handleSubmit} style={styles.inputForm}>
-            <label style={styles.label}>
+          <form onSubmit={this.handleSubmit} className="inputForm">
+            <label className="label">
               Start:
-              <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate} style={styles.inputLabel}></input>
+              <input type="datetime-local" value={startDate || currentDate} min={currentDate}  onChange={this.handlestartDate} className="inputLabel"></input>
             </label>
-            <label style={styles.labelEnd}>
+            <label className="labelEnd">
               End:
-              <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate} style={styles.inputLabel}></input>
+              <input type="datetime-local" value={endDate || currentDate} min={currentDate} onChange={this.handleendDate} className="inputLabel"></input>
             </label>
-            <label style={styles.label}>
+            <label className="label">
               Event:
-              <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} style={styles.inputLabel}/>
+              <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} className="inputLabel"/>
             </label>
             <label>
             <input className="submit" type="submit" value="Submit" />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const styles = {
   event: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Indie Flower",
     textAlign: "inherit",
     fontSize: "22px",
     color: "black",

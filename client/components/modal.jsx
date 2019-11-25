@@ -8,7 +8,7 @@ const styles = {
     justifyContent: "center",
   },
   modalContent: {
-    fontFamily: "Comic Sans MS",
+    fontFamily: "Indie Flower",
     fontSize: "larger",
     backgroundColor: "#C74579",
     margin: "100px 500px",
@@ -49,7 +49,7 @@ const Modal = ({onSubmit, handlestartDate, handleendDate, handleEvent, startDate
   <div style={show ? styles.modalShow : styles.modalNone}
   className={show ? "modalShow" : "modalNone"} onClick={toggle}>
     <div style={styles.modalContainer}>
-      <div style={styles.modalContent}>
+      <div style={styles.modalContent} className="modalContent">
         <div>
           <div style={styles.trash} className="trash">
             <i className="fa fa-trash" aria-hidden="true" onClick={() => {deleteEvent(id)}}></i>
