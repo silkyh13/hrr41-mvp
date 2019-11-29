@@ -57,7 +57,7 @@ class App extends React.Component {
           </section >
         </main>
 
-        <aside className="card">
+        <aside>
           <List componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} year={this.state.year} month={this.state.month} convert={this.convert}/>
 
         </aside>
