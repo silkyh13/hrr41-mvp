@@ -1,0 +1,94 @@
+h1 {
+  font-family: "Indie Flower", cursive, sans-serif;
+  color:  #ad5e7e;
+  padding-left: 10%;
+  font-size: 300%;
+  font-weight: bold;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+}
+.left {
+  display: flex;
+  flex-flow: column;
+  margin-top: 5%;
+  justify-content: space-between;
+  max-width: 550px;
+  margin-right: 5%;
+}
+
+
+.calendar-container {
+  font-family: "Indie Flower", cursive, sans-serif;
+  font-weight: bold;
+  font-size: 225%;
+  display: grid;
+  padding-right: 10px;
+  text-align: center;
+  width: 500px;
+  background-color: white;
+  border-color: #ad5e7e;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.calendar-container:hover{
+  background-color: white;
+  color:#ad5e7e;
+}
+.calendar-header {
+  font-size: 140%;
+}
+hr {
+  width: 100%;
+  border-top: 1px solid #ad5e7e;
+}
+
+.labelEnd {
+  font-size: x-large;
+  padding-left: 22px;
+}
+.label {
+  font-size: x-large;
+}
+.inputLabel {
+  border: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  margin: 0px 10px 0px 10px;
+  width: 370px
+}
+.inputEvent {
+  border: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  width: 250px;
+  height: 100px;
+  padding: 5px 0 74px 0;
+  margin: 12px;
+}
+
+.right {
+  margin-top: 5%;
+}
+.event {
+  overflow: scroll;
+  height: 600px;
+  background-color: white;
+  opacity: 0.55;
+  width: 120%;
+  padding-left: 5%;
+}
+.list {
+  font-weight: bolder;
+  font-size: 100%;
+}
+.individualEvent{
+  font-family: "Indie Flower", cursive, sans-serif;
+  text-align: inherit;
+  font-size: 200%;
+  color: #ad5e7e;
+  letter-spacing: 5px;
+}

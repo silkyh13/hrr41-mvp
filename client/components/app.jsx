@@ -45,21 +45,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="main">
-        <div className="left">
+      <div className="app">
 
+        <main>
+          <section className="card">
             <Calendar yearMonth={this.yearMonth}/>
+          </section>
 
+          <section>
             <Form componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} convert={this.convert}/>
+          </section >
+        </main>
 
+        <aside className="card">
+          <List componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} year={this.state.year} month={this.state.month} convert={this.convert}/>
 
-        </div>
-
-        <div className="right">
-          <List componentDidMount={this.componentDidMount} data={this.state.data} currentDate={this.state.currentDate} year={this.state.year} month={this.state.month}
-          convert={this.convert}/>
-        </div>
-
+        </aside>
       </div>
     );
   }

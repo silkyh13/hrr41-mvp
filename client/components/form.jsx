@@ -61,25 +61,25 @@ class Form extends React.Component {
 
     const {startDate, endDate, event } = this.state;
     return (
-    <div>
+    <div className="individualLabel">
       <form onSubmit={this.handleSubmit}>
 
-      <label className="label">
-        Start:
-        <input type="datetime-local" value={startDate || this.props.currentDate} min={this.props.currentDate}  onChange={this.handlestartDate} className="inputLabel"></input>
+      <label>
+        Start:<br></br>
+        <input type="datetime-local" value={startDate || this.props.currentDate} min={this.props.currentDate}  onChange={this.handlestartDate}></input>
       </label>
 
-      <label className="labelEnd">
-        End:
-        <input type="datetime-local" value={endDate || this.props.currentDate} min={this.props.currentDate} onChange={this.handleendDate} className="inputLabel"></input>
+      <label>
+        End:<br></br>
+        <input type="datetime-local" value={endDate || this.props.currentDate} min={this.props.currentDate} onChange={this.handleendDate}></input>
       </label>
 
-      <label className="label">
-        Event:
-        <input type="text" placeholder="event" value={event || ''} onChange={this.handleEvent} className="inputLabel"/>
+      <label for="message">
+        Event:<br></br>
+        <textarea name="message" value={event || ''} onChange={this.handleEvent} cols="40" rows="3"></textarea>
       </label>
 
-
+      <br></br>
       <label>
         <input className="submit" type="submit" value="Submit" />
       </label>
