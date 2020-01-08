@@ -121,7 +121,7 @@ class List extends React.Component {
             if (header === yearAndMonth) {
               return (
                 <div className="event" key={index} >
-                  <h1>{header}</h1>
+                  <h2>{header}</h2>
                   <ol  className="list">
                     {groups[header].data.map((event, index) => {
                         return (

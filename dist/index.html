@@ -20,7 +20,6 @@
       line-height: 1.4;
     }
     header {
-      margin-bottom: 15px;
       background: #333;
       color: #fff;
       padding: 15px;
@@ -44,6 +43,7 @@
       cursor: pointer;
       transition: 800ms ease all;
       outline: none;
+      max-height: 416px;
     }
 
     .calendar-container:hover{
@@ -51,7 +51,7 @@
       color:#ad5e7e;
     }
     .calendar-header {
-      font-size: 140%;
+      font-size: 120%;
     }
     .individualLabel{
       font-family: "Indie Flower", cursive, sans-serif;
@@ -70,12 +70,19 @@
       font-size: 300%;
       font-weight: bold;
     }
+    h2 {
+      font-family: "Indie Flower", cursive, sans-serif;
+      color: black;
+      font-size: 300%;
+      font-weight: bold;
+    }
     .event {
       overflow: scroll;
-      height: 700px;
+      max-height: 800px;
+      width: 710px;
       background-color: white;
       opacity: 0.55;
-      padding-left: 5%;
+      padding-left: 10%;
     }
     .list {
       font-weight: bolder;
@@ -85,7 +92,7 @@
       font-family: "Indie Flower", cursive, sans-serif;
       text-align: inherit;
       font-size: 200%;
-      color: #ad5e7e;
+      color: #050505;
       letter-spacing: 5px;
     }
     .modalShow {
@@ -168,6 +175,14 @@
       background: #f4f4f4;
       padding: 20px;
       margin-bottom: 10px;
+      height: 450px;
+    }
+    .aside-card {
+      border: 1px solid #ddd;
+      background: red;
+      padding: 20px;
+      margin-bottom: 10px;
+      height: 450px;
     }
     footer {
       background: #333;
@@ -177,6 +192,7 @@
     .clr {
       clear: both;
     }
+
     /* body {
       background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.RFRHJWMSMQQUGZLW6ZmEVQHaEK%26pid%3DApi&f=1");
       background-repeat: repeat-y;
